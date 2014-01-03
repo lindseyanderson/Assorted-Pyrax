@@ -1,21 +1,23 @@
+#!/usr/bin/env python
+
 import pyrax
-import pyrax.exceptions as ex
+import pyrax.exceptions as exc
 import sys
 
 
 def pyrax_auth(username, apikey):
-  try:
-    pyrax.set_credentials(str(username), str(apikey))
-    return True
-  except exc.AuthenticationFailed:
-    print "Authentication was not successful, please enter your username and API key from your Rackspace Control Panel"
-    return False
+	try:
+		pyrax.set_credentials(str(username), str(apikey))
+		return True
+	except exc.AuthenticationFailed:
+		print "Authentication was not successful, please enter your username and API key from your Rackspace Control Panel"
+		return False
 
 def verify_input():
-  if ( len(sys.argv) != 3 ):
-    sys.exit('Usage: %s <username> <apikey>' % sys.argv[0])
-  else:
-    auth_test = pyrax_auth(sys.argv[1], sys.argv[2])
+	if ( len(sys.argv) != 3 ):
+		sys.exit('Usage: %s <username> <apikey>' % sys.argv[0])
+	else:
+		auth_test = pyrax_auth(sys.argv[1], sys.argv[2])
 
 if __name__ == '__main__':
 	verify_input()
